@@ -1,0 +1,17 @@
+/* eslint-disable linebreak-style */
+const path = require('path');
+const fs = require('fs');
+
+/**
+ * Render Config
+ * @param req
+ * @param res
+ */
+exports.config = (req, res) => {
+  const domain = req.headers.host || req.headers.origin;
+  const file = path.join(__dirname, '..', 'public', 'config-template.json');
+
+  const configTemplate = fs.readFileSync(file, 'utf-8');
+  const config = JSON.parse(configTemplate.replace(/\$DOMAIN/g, domain + '/' + req.params.type));
+  res.json(config);
+};

@@ -1,0 +1,56 @@
+extends ../layout
+
+append head
+  script(src="javascript/activity/pushCustomActivity.js")
+
+block content
+  article.slds-card
+    .slds-card__header.slds-grid
+      header.slds-media.slds-media_center.slds-has-flexi-truncate
+        .slds-media__figure
+          span.slds-icon_container.slds-icon-standard-contact(title="contact")
+            svg.slds-icon.slds-icon_small(aria-hidden="true")
+              use(xlink:href="/icons/standard-sprite/svg/symbols.svg#contact")
+            span.slds-assistive-text contact
+        .slds-media__body
+          h2.slds-card__header-title
+            a.slds-card__header-link.slds-truncate(href="javascript:void(0);" title="Card Header")
+              span= title
+    .slds-card__body.slds-card__body_inner
+      form.js-settings-form
+        .slds-form-element
+          label.slds-form-element__label(for="DropdownOptions") Type
+          .slds-form-element__control
+            .slds-select_container
+              select#DropdownOptions.slds-select.js-activity-setting(name='dropdownOptions')
+                each dropdownOption in dropdownOptions
+                  option(value=dropdownOption.value)= dropdownOption.name
+              
+          label.slds-form-element__label.slds-p-top_medium(for='Text')
+            abbr.slds-required(title='required')
+            | Text *
+          .slds-form-element__control
+            input#Text.slds-input.js-activity-setting(placeholder='', name='text', required=true)
+          
+          label.slds-form-element__label.slds-p-top_medium(for='Action') Ação
+          .slds-form-element__control
+            input#Action.slds-input.js-activity-setting(placeholder='', name='action')
+
+          label.slds-form-element__label.slds-p-top_medium(for='Silence')
+            abbr.slds-required(title='required')
+            | Silenciar *
+          .slds-form-element__control
+            .slds-select_container
+              select#Silence.slds-select.js-activity-setting(name='Silence', required=true)
+                each dropdownOption in dropdownOptionsSilence
+                  option(value=dropdownOption.value)= dropdownOption.name
+
+          label.slds-form-element__label.slds-p-top_medium(for='Tags') Tags
+          .slds-form-element__control
+            input#Tags.slds-input.js-activity-setting(placeholder='', name='tags')
+
+          label.slds-form-element__label.slds-p-top_medium(for='AppName') AppName
+          .slds-form-element__control
+            input#AppName.slds-input.js-activity-setting(placeholder='', name='appName')
+
+    footer.slds-card__footer
